@@ -1,0 +1,377 @@
+Vektorer - skapa
+Likt C och Java
+let arr = new Array(3);
+arr[0] = "Alexander";
+arr[1] = "Pierre";
+arr[2] = "Peter";
+//["Alexander", "Pierre", "Peter”]
+//arr.length === 3
+Vanligast i JavaScript:
+let arr = [];
+arr.push("Alexander");
+arr.push("Pierre");
+arr.push("Peter");
+//["Alexander", "Pierre", "Peter”]
+//arr.length === 3
+Vi kan initiera vektorerna direkt:
+let arr = ["Alexander", "Pierre", "Peter"];
+let arr = new Array("Alexander", "Pierre", "Peter");
+Vektorer - sortera
+• Funktionen sort(); används för att sortera en vektor i
+bokstavsordning
+let arr = ["Peter", "Pierre", "Alexander"];
+arr.sort();
+console.log(arr); //["Alexander", "Peter", "Pierre"]
+• För att sortera tal behöver vi skicka med en funktion:
+arr.sort(function(a, b){
+return a - b;
+});
+
+<!-- exempel 1 -->
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8">
+    <title>Kodexempel 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script type="text/javascript">
+        "use strict"; // Enables strict mode which helps catch common coding mistakes
+
+        // Array of Swedish counties
+        var counties = [
+            'Stockholms län',
+            'Västra Götalands län',
+            'Skåne län',
+            'Östergötlands län',
+            'Uppsala län',
+            'Jönköpings län',
+            'Hallands län',
+            'Örebro län',
+            'Södermanlands län',
+            'Dalarnas län',
+            'Gävleborgs län',
+            'Värmlands län',
+            'Västmanlands län',
+            'Västerbottens län',
+            'Norrbottens län',
+            'Västernorrlands län',
+            'Kalmar län',
+            'Kronobergs län',
+            'Blekinge län',
+            'Jämtlands län',
+            'Gotlands län',
+        ];
+
+        // Logging the original array of counties to the console
+        console.log(counties);
+
+        // Logging the second county in the array (index 1) to the console
+        console.log(counties[1]);
+
+        // Sorting the array of counties alphabetically
+        counties.sort();
+
+        // Logging the sorted array of counties to the console
+        console.log(counties);
+
+        // Writing an unordered list (<ul>) to the document
+        document.write("<ul>");
+
+        // Looping through the sorted array of counties and writing each as a list item (<li>)
+        for(let i = 0; i < counties.length; i++){
+            document.write("<li>" + counties[i] + "</li>");
+        }
+
+        // Closing the unordered list
+        document.write("</ul>");
+
+        // Using forEach to write each county as a paragraph (<p>)
+        counties.forEach(function(item, index){
+            document.write("<p>" + item + "</p>");
+        });
+
+        // Array of numbers
+        let numbers = [11, 5, 3, 8, 12, 23, 33, 44, 4, 9, 1];
+
+        // Logging the original array of numbers to the console
+        console.log(numbers);
+
+        // Sorting the array of numbers in ascending order using a compare function
+        numbers.sort(function(a, b){
+            return a - b;
+        });
+
+        // Logging the sorted array of numbers to the console
+        console.log(numbers);
+    </script>
+</body>
+</html>
+
+Objekt
+• I föreläsning 1 gick vi igenom några globala objekt: window,
+document, math
+• Ett objekt kan innehålla variabler och funktioner.
+• Vi har gått igenom t.ex.:
+window.alert(”Hej”);
+document.write(”Hej”);
+• JavaScript är ett väldigt snällt språk. Språket är inte så noga vad
+skillnaden är mellan variabler, funktioner, egenskaper och metoder
+som i t.ex. C.
+Objekt - forts.
+• Det finns några sätt på att skapa objekt på:
+var objekt = {};
+var objekt = new Object();
+• Vi kan lägga till egenskaper genom att skriva:
+objekt.namn = "Alexander";
+• Vi kan lägga till en metod genom att skriva:
+objekt.skrivUt = function(...){...};
+• Sedan kan vi kalla på metoden genom att skriva:
+objekt.skrivUt(...);
+Objekt - forts.
+• För att skapa ett objekt på ett sätt i JavaScript kan vi skriva:
+var person = {
+namn: "Alexander",
+skrivUt: function(){
+console.log(this.namn);
+}
+};
+person.skrivUt(); //"Alexander"
+Objekt - forts.
+• Det går också att skapa objekt genom en funktion:
+function Person(){
+this.name = "Alexander";
+this.printName = function(){
+console.log(this.name);
+}
+}
+var p = new Person(); //<- Vi måste skapa objektet!
+p.printName(); //”Alexander”
+
+<!-- exempel 2 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kodexempel 2</title>
+</head>
+<body>
+    <script type="text/javascript">
+        "use strict"; // Enables strict mode which helps catch common coding mistakes
+
+        // Defining an object literal for human with properties and methods
+        let human = {
+            name: "Carl",
+            age: 36,
+            height: 190,
+
+            // Method to set the name property
+            setName: function(name) {
+                this.name = name;
+            },
+
+            // Method to get the name property
+            getName: function() {
+                return this.name;
+            }
+        };
+
+        // Logging the human object to the console
+        console.log(human);
+
+        // Updating the name property using setName method
+        human.setName("Alexander");
+
+        // Logging the updated name property and the human object to the console
+        console.log(human.name);
+        console.log(human);
+
+        // Defining a constructor function for Human
+        function Human(name, age, height) {
+            this.name = name;
+            this.age = age;
+            this.height = height;
+
+            // Method to print the human details in a paragraph
+            this.print = function() {
+                document.write("<p>" + this.name + " | " + this.age + "</p>");
+            }
+        }
+
+        // Array of names to be used for creating Human instances
+        var nameList = [
+            'Alexander',
+            'Carl',
+            'Maria',
+            'Pierre',
+            'Katarina',
+            'Peter',
+            'Lisa',
+            'Elin'
+        ];
+
+        // Loop to create and print details of 10 Human instances
+        for (let i = 0; i < 10; i++) {
+            // Randomly selecting a name from the nameList
+            let nameIndex = Math.floor(Math.random() * nameList.length);
+            let name = nameList[nameIndex];
+
+            // Generating random age and height values
+            let age = Math.floor(Math.random() * 51) + 10;
+            let height = Math.floor(Math.random() * 121) + 50;
+
+            // Creating a new Human instance
+            let h = new Human(name, age, height);
+
+            // Printing the human details
+            h.print();
+        }
+
+        // Uncommenting the following lines would create and log a Human instance
+        // let alexander = new Human("Alexander", 61, 130);
+        // console.log(alexander);
+    </script>
+</body>
+</html>
+
+Document Object Model (DOM)
+• Dokumentobjektsmodellen
+(DOM:en) är strukturen på HTML-
+koden i en webbläsare
+• Det är hur webbläsare läser
+HTML-koden
+• Ni har säkert redan sett denna del
+i konsolen.
+(Bild: Birger Eriksson -Eget arbete, CC BY-SA 3.0,
+https://commons.wikimedia.org/w/index.php?curid=18034500)
+Document Object Model – Noder (nodes)
+• DOM-trädet består av noder.
+• Noderna kan ha olika typer, t.ex.
+elementnod, textnod,
+dokumentnod
+• Noder kan ha syskon (siblings),
+barn (children) och en förälder
+(parent)
+(Bild: Birger Eriksson -Eget arbete, CC BY-SA 3.0,
+https://commons.wikimedia.org/w/index.php?curid=18034500)
+Document Object Model -
+konsolen
+• Med konsolen kan ni se hur DOM:en är
+uppbyggd.
+• Det är ett mycket bra verktyg
+• Det finns information om:
+• Elementen
+• CSS
+• Lyssnare
+• Breakpoints
+• Filer som laddas
+• och mycket mer
+Hittar noder i DOM:en
+document.getElementById(id); Returnerar en nod med angivet id, eller null om inget
+element matchar
+document.getElementsByTagName(tagg); Returnerar en lista (vektor | HTMLCollection) med 0, 1
+eller flera noder som, har angivet elmentnamn, t.ex.
+”div”, ”p”, ”h1”
+document.getElementsByClassName(klass); Returnerar en lista (vektor | HTMLCollection) med 0, 1
+eller flera noder som, har angivet klass
+document.getElementsByName(namn); Returnerar en lista (vektor | HTMLCollection) med 0, 1
+eller flera noder som har det angivna värder på name-
+attributet. Används vid formulär
+document.querySelector(CSS-selektor); Returnerar en nod som matchar angiven CSS-selektor,
+t.ex. ”.form”, ”#page-div”
+document.querySelectorAll(CSS-selektor); Returnerar en lista (NodeList) med 0, 1 eller flera
+noder som matchar angiven CSS-selektor
+Nodsamlingar
+• Som ni såg i tabellen så hämtar vi ut en nod, en HTMLCollection eller
+en NodeList.
+• En samling av noder fungerar oftast som en vanlig vektor
+• Vi kan få ut en nod ur en lista genom att hämta första värdet i
+vektorn:
+document.getElementsByClassName("ads")[0];
+• Vi kan också få ut längden på listan genom att skriva:
+document.getElementsByClassName("ads").length;
+Läsa och sättra attributvärden
+• Vi kan läsa attribut genom att skriva:
+var imgSrc = img.getAttribute("src");
+var imgSrc = document.getElementById("first-image").getAttribute("src");
+• Det går också att ge attribut till noder:
+img.setAttribute("class", "images");
+img.setAttribute("src", "kau_ad.jpg");
+• Vi kan också ta bort attribut genom att skriva:
+img.removeAttribute("class");
+img.removeAttribute("src");
+Ändra innehållet i ett element
+• Dessa funktioner används både för att hämta och sätta värden i
+elementet
+element.innerHTML Hämtar HTML-koden av ett element
+element.outerHTML Hämtar hela elementet
+element.textContent Hämtar enbart texten av ett element
+element.innerText Hämtar enbart den synliga texten av ett element
+• Vi kan också sätta värdet genom att skriva:
+element.textContent = ”Hej hej”;
+element.innerHTML = ”<b>Hej</b> <i>hej</i>”;
+Tid - date-objektet
+• Vi kan skapa ett Date-o
+
+<!-- exempel 3 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kodexempel 3</title>
+    <!-- Link to external CSS file for styling -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <!-- Main container for the chat interface -->
+    <div id="container">
+        <!-- Section to display messages -->
+        <div id="messages">
+            <p class="message">Carl: Hi | 12:32:17</p>
+            <p class="message">Maria: Hello | 12:32:33</p>
+        </div>
+        <!-- Section containing input field and send button -->
+        <div id="buttons">
+            <input type="text" id="input"> <!-- Input field for typing messages -->
+            <input type="button" id="btn_send" value="Send"> <!-- Button for sending messages -->
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        // Getting references to DOM elements
+        let input = document.getElementById("input");
+        let messages = document.querySelector("#messages");
+        //console.log(input, messages);
+        let button = document.getElementById("btn_send");
+
+        // Function to create and display a new message
+        function createMessage(username, text) {
+            let p = document.createElement("p"); // Create a new paragraph element
+            p.setAttribute("class", "message"); // Set the class attribute for styling
+
+            // Get the current time
+            let date = new Date();
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            let seconds = date.getSeconds();
+            let fullTimeString = hours + ":" + minutes + ":" + seconds;
+
+            // Format the message with username, text, and time
+            let currentTime = date.toLocaleTimeString("sv-SE");
+            //p.textContent = username + ": " + text + " | " + currentTime;
+            p.textContent = username + ": " + text + " | " + fullTimeString;
+
+            // Append the new message to the messages container
+            messages.appendChild(p);
+        }
+
+        // Add event listener to the send button
+        button.addEventListener("click", function() {
+            let text = input.value; // Get the value from the input field
+            createMessage("Alexander", text); // Create and display the new message
+        });
+    </script>
+</body>
+</html>
+
+
+
