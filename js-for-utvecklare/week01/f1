@@ -1,0 +1,160 @@
+<!-- Week 1 Introduction Notes -->
+<!-- 
+JavaScript är ett dynamiskt skriptspråk som gör det möjligt att skapa interaktiva och dynamiska webbsidor.
+Lanserades år 1995 och blev standardiserat via ECMAScript.
+Senaste versionen är ECMAScript 2023 (ECMAScript 14), med uppdateringar varje år sedan 2015.
+
+Kodplacering: Du kan lägga JavaScript-koden direkt i HTML (<script>-taggar) eller i separata .js-filer. Tänk på att körordningen är viktig.
+
+Variabler och funktioner: JavaScript erbjuder flexibilitet:
+- Du kan använda var, let och const för variabler, beroende på synlighet och scope.
+- Funktioner kan vara globala eller lokala och tillåter argument samt returnvärden.
+
+Vanliga verktyg: Du har tillgång till debugging med console.log(), dialogrutor (alert, prompt, confirm), och Math-objektet för beräkningar.
+-->
+
+<!-- Example 1 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kodexempel 1</title>
+    <script src="functions.js"></script> <!-- Importing external JavaScript file -->
+</head>
+<body>
+    <div id="content"></div> <!-- Placeholder for content -->
+    <script>
+        // Declaring variables
+        let name = "Alexander";
+        let number = 32;
+
+        // Uncommenting these lines would write the values to the document
+        // document.write("Hello World!");
+        // document.write(name);
+        // document.write(number);
+
+        // Defining a function to write formatted text to the document
+        function write(name, text) {
+            document.write("<b>" + name + "</b> wrote: " + text + "<br>");
+        }
+
+        // Calling the write function with different arguments
+        write("Pierre", "Hej");
+        write(name, "Hej hej");
+
+        // Defining a function to subtract two numbers
+        function sub(tal1, tal2) {
+            return tal1 - tal2;
+        }
+
+        // Calling the write function to display the result of subtraction
+        write("Peter", "10 - 3 = " + sub(10, 3));
+    </script>
+</body>
+</html>
+
+<!-- Example 2 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kodexempel 2</title>
+</head>
+<body>
+    <script type="text/javascript">
+        // Function to write text within a <p> tag
+        function write(text) {
+            document.write("<p>" + text + "</p>");
+        }
+
+        // Declaring variables with different types
+        let tal1 = 10;
+        let tal2 = "5";
+
+        // Uncommenting these lines would convert tal2 to an integer
+        // tal2 = parseInt(tal2);
+        // tal2 = 5;
+
+        // Checking the type of tal1
+        if (typeof tal1 == "number") {
+            write("Tal1 är ett nummer!");
+        }
+
+        // Checking the type of tal2
+        if (typeof tal2 == "number") {
+            write("Tal2 är ett nummer!");
+        }
+
+        // Declaring boolean variables
+        let teacher = true;
+        let student = false;
+
+        // Checking if teacher is true
+        if (teacher) {
+            write("Jag är en lärare");
+        }
+
+        // Writing the result of 0.1 + 0.2
+        write(0.1 + 0.2);
+
+        // Loose comparison (==) between a number and a string
+        if (95 == "95") {
+            write("Talet 95 har samma värde som strängen '95'");
+        }
+
+        // Strict comparison (===) between a number and the result of parseInt
+        if (95 === parseInt("95mkoasdkmsadksdaklmdas")) {
+            write("Talet 95 har samma värde som strängen '95'");
+        }
+
+        // Writing the result of parseInt with a complex string
+        write(parseInt("95mkoasdkmsadksdaklmdas312213231"));
+    </script>
+</body>
+</html>
+
+<!-- Example 3 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kodexempel 3</title>
+</head>
+<body>
+    <!-- Creating a text input field with a preset value -->
+    <input type="text" value="Text här" id="input" />
+
+    <script type="text/javascript">
+        // Executing code when the page is fully loaded
+        window.onload = function() {
+            // Looping through numbers 0 to 9
+            for (let i = 0; i < 10; i++) {
+                // Checking if the number is even or odd
+                if (i % 2 == 0) {
+                    console.log("I är jämnt " + i);
+                } else {
+                    console.log("I är udda " + i);
+                }
+            }
+
+            // Uncommenting this line would cause an error because 'i' is block-scoped
+            // console.log(i);
+
+            // Logging various window properties and objects
+            console.log(window);           // Logs the window object
+            console.log(window.history);   // Logs the history object
+            console.log(window.history.length);  // Logs the length of the history
+
+            // Logging the input element by its ID
+            console.log(document.getElementById("input"));
+
+            // Logging a styled message
+            console.log("%c Cool färg", "background: #42f5ce; color: #4e42f5; padding: 32px;");
+
+            // Logging the result of Math.floor with a floating-point number
+            console.log(Math.floor(1.999999999999999999999999999999999999999999999999));
+            // Logging the same floating-point number to show precision handling
+            console.log(1.9999999999999999999999999);
+            // Logging a shorter floating-point number for comparison
+            console.log(1.99999999);
+        };
+    </script>
+</body>
+</html>
