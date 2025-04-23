@@ -1,0 +1,133 @@
+Dataformat 
+Datastrukturer
+* text eller binär 
+* lista(en dimension)
+*tabell(2 dimension)
+*grafiskstrukturer
+
+Serialisering av data 
+* en data fil från grunden är en långstäng av binäratal 1 :or och 0:or.
+*för att lagra en fil måste man konvertera den till en sträng = serialisering
+* text lagras i ASCII eller Unicode
+* bilder lagras i png eller jpeg
+* filmer o ljud öagras med codecs, mp4
+
+
+Binära serialiseringar av strukturerad data
+* kompakt och effektiv serialisering 
+* ex: dat-filer som skapas i C
+* är ej läsbar av människor.
+
+dataformat som människor kan läsa 
+* CSV (kommaseparerande värden) 
+- enkelt format som lagrar tabelldata i kolumner och data 
+- EXempel: id.title.genre.rating
+la,laland . 2016, musical, 9
+* JSON
+- bygger på javascript syntax
+- exempel: [
+{
+"id": 1,
+"title": "La La Land",
+"year": 2016,
+"genre": "musical",
+"rating": 9
+},
+{
+"id": 2,
+"title": "It",
+"year": 2017,
+"genre": "horror",
+"rating": 7
+}
+]
+
+* XML
+-ett mer flexibelt format som liknar HTML
+- Exempel: <movies>
+<movie id="1">
+<title>La La Land</title>
+<year>2016</year>
+<genre>musical</genre>
+<rating>9</rating>
+</movie>
+<movie id="2">
+<title>It</title>
+<year>2017</year>
+<genre>horror</genre>
+<rating>7</rating>
+</movie>
+</movies>
+
+* YAML
+- ett ännu mer flexibelt dataformat som är ännu mer lättläst
+- Exempel: d: 1
+title: La La Land
+year: 2016
+genre: musical
+rating: 9
+- id: 2
+title: It
+year: 2017
+genre: horror
+rating:
+
+Kodexempel 1: 
+//event lysssnare vid sidoladdning vilket betyder att när sidan laddas upp så aktiveras functionen loadData
+window.addEventListener('load', loadData);
+
+function loadData() {
+hämtar refererar till DOM elementen
+  let container = document.getElementById('content');
+  let preloader = document.getElementById('preloader');
+  //container: Dit innehållet ska läggas.
+  //preloader: Ett förladdningselement som ska döljas när datan är hämtad.
+
+//hämtar data från API genom att använda fetch för att ett HTTP anrop till https://restcountries.com/v3.1/name/sweden. Det hämtar data om Sverige i JSON-format.
+// När data är hämtad bearbetas svaret. Den första posten i resultatet (data[0]) innehåller information om Sverige som lagras i variabeln countryData.
+  window.fetch('https://restcountries.com/v3.1/name/sweden').then(function(response) {
+    return response.json()
+  }).then(function(data) {
+    console.log(data);
+    let countryData = data[0];
+
+//kapar ett kort med information: Koden skapar ett visuellt "kort"-element med hjälp av DOM-manipulation:
+    let card = document.createElement('div');
+    card.className = 'card';
+    card.style.maxWidth = '20rem';
+    container.appendChild(card);
+
+    let cardImage = document.createElement('img');
+    cardImage.className = 'card-img-top';
+    cardImage.src = countryData.flags.png;
+    card.appendChild(cardImage)
+
+    let cardBody = document.createElement('div');
+    cardBody.className = 'card-body';
+    card.appendChild(cardBody);
+
+    let cardTitle = document.createElement('h5');
+    cardTitle.className = 'card-title';
+    cardTitle.textContent = countryData.name.common;
+    cardBody.appendChild(cardTitle)
+
+    let capital = document.createElement('p');
+    capital.className = 'card-text';
+    capital.innerHTML = '<b>Capital:</b> ' + countryData.capital;
+    cardBody.appendChild(capital)
+
+    let area = document.createElement('p');
+    area.className = 'card-text';
+    area.innerHTML = '<b>Area:</b> ' + countryData.area.toLocaleString() + ' km<sup>2</sup>';
+    cardBody.appendChild(area)
+
+    let population = document.createElement('p');
+    population.className = 'card-text';
+    population.innerHTML = '<b>Population:</b> ' + countryData.population.toLocaleString();
+    cardBody.appendChild(population)
+//Döljer förladdaren: När kortet är skapat och datan har hämtats, döljs förladdningselementet:
+    preloader.classList.add('d-none')
+
+  });
+}
+tldr: Koden hämtar data om Sverige från ett REST API och visar flaggan, namnet, huvudstaden, ytan samt befolkningen i ett kortformat på en webbsida.
